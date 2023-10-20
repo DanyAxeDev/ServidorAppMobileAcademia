@@ -9,7 +9,8 @@ router.get('/', async (req, res, next) => {
           codigo: item._id,
           horario: item.horario, 
           nome: item.nome,
-          duracao: item.duracao
+          duracao: item.duracao,
+          dia: item.dia
         }
     });
     res.send(valores);
@@ -23,8 +24,9 @@ router.post('/new', async (req, res, next) => {
   const horario = req.body.horario;
   const nome = req.body.nome;
   const duracao = req.body.duracao;
+  const dia = req.body.dia
   try {
-    const result = await global.db.insert({ _id, horario, nome, duracao });
+    const result = await global.db.insert({ _id, horario, nome, duracao, dia });
     res.send({ resultado: 'Inserido' });
   } catch (err) {
     res.send({ resultado: 'Erro ao Inserir', mensagem: err });

@@ -1,11 +1,16 @@
+
 const mongoClient = require('mongodb').MongoClient;
  
 mongoClient.connect('mongodb://localhost')
     .then(conn => global.conn = conn.db('Academia'))
     .catch(err => console.log(err))
   
-function findAll() {
-    return global.conn.collection('Atividades').find().toArray();
+function findAll(diaSemana) {
+    if (diaSemana) {
+        return global.conn.collection('Atividades').find({ diaSemana }).toArray();
+    } else {
+        return global.conn.collection('Atividades').find().toArray();
+    }
 }
  
 function insert(atividade) {
