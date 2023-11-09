@@ -21,4 +21,16 @@ function deleteOne(codigo) {
     return global.conn.collection('Atividades').deleteOne({ _id: codigo });
 }
 
-module.exports = { findAll, insert, deleteOne }
+function allUsers(){
+    return global.conn.collection('Users').find().toArray();
+}
+
+function addUser(user){
+    return global.conn.collection('Users').insertOne(user);
+}
+
+function deleteUser(_id){
+    return global.conn.collection('Users').deleteOne({_id: codigoUser})
+}
+
+module.exports = { findAll, insert, deleteOne, allUsers, addUser, deleteUser }
