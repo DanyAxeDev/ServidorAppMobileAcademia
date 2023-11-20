@@ -26,7 +26,8 @@ router.get('/users', async (req, res, next) => {
       return{
         codigoUser: item._id,
         email: item.email,
-        senha: item.senha
+        senha: item.senha,
+        tipoUsuario: item.tipoUsuario
       }
     });
     res.send(usuarios);
@@ -53,8 +54,9 @@ router.post('/newuser', async (req, res, next) =>{
   const _id = req.body.codigoUser;
   const email = req.body.email;
   const senha = req.body.senha;
+  const tipoUsuario = req.body.tipoUsuario;
   try{
-    const result = await global.db.addUser({_id, email, senha});
+    const result = await global.db.addUser({_id, email, senha, tipoUsuario});
     res.send({resultado: 'Inserido novo usuário'});
   }catch(err){
     res.send({resultado: 'Erro ao inserir usuario', mensagem: err});
